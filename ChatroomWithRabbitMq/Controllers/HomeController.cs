@@ -19,27 +19,38 @@ namespace ChatroomWithRabbitMq.Controllers
             _context = applicationDbContext;
         }
 
-        public async Task<IActionResult>Index()
+        public IActionResult Index()
         {
-            var currentUser = await _userManager.GetUserAsync(User);
-            ViewBag.CurrentUserName = currentUser.UserName;
-            var messages = await _context.Messages.ToListAsync();
+        
             return View();
+        }
+
+        public async Task<IActionResult> Chatroom()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var currentUser = await _userManager.GetUserAsync(User);
+                if (User.Identity.IsAuthenticated)
+                {
+                    ViewBag.CurrentUserName = currentUser.UserName;
+
+                }
+                var messages = await _context.Messages.OrderByDescending(p=>p.Id).Take(50).ToListAsync();
+                return View(messages);
+            }
+            return Redirect("Index");
+            
         }
 
         public async Task<IActionResult> Create(Message message)
         {
-            if(ModelState.IsValid) 
-            {
-                message.UserName = User.Identity.Name;
-                var sender = await _userManager.GetUserAsync(User);
-                message.UserId= sender.Id;
-                await _context.Messages.AddAsync(message);
-                await _context.SaveChangesAsync();
-                return Ok();
-
-            }
-            return Error();
+           
+            message.UserName = User.Identity.Name;
+            var sender = await _userManager.GetUserAsync(User);
+            message.UserId= sender.Id;
+            await _context.Messages.AddAsync(message);
+            await _context.SaveChangesAsync();
+            return Ok();
         }
 
         public IActionResult Privacy()
