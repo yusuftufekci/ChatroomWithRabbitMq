@@ -10,6 +10,7 @@ namespace ChatroomWithRabbitMq.Data
             : base(options)
         {
         }
+        public DbSet<Message> Messages { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -18,5 +19,6 @@ namespace ChatroomWithRabbitMq.Data
                 .WithMany(p => p.Messages)
                 .HasForeignKey(p => p.UserId);
         }
+
     }
 }
