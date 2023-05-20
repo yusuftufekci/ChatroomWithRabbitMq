@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using ChatroomWithRabbitMq.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ChatroomWithRabbitMq.Data
@@ -8,6 +9,14 @@ namespace ChatroomWithRabbitMq.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+        }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<Message>()
+                .HasOne<ChatUser>(p => p.SenderUser)
+                .WithMany(p => p.Messages)
+                .HasForeignKey(p => p.UserId);
         }
     }
 }
