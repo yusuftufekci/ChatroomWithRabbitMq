@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatroomWithRabbitMq", "ChatroomWithRabbitMq\ChatroomWithRabbitMq.csproj", "{EF89AAAF-5EF3-4B9B-9312-90E70A61F809}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF89AAAF-5EF3-4B9B-9312-90E70A61F809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF89AAAF-5EF3-4B9B-9312-90E70A61F809}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF89AAAF-5EF3-4B9B-9312-90E70A61F809}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF89AAAF-5EF3-4B9B-9312-90E70A61F809}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3769B8DB-CF6A-4DA6-AA97-CC2EA7B6B137}
+	EndGlobalSection
+EndGlobal
