@@ -7,7 +7,7 @@ namespace ChatroomWithRabbitMq.Core.Hubs
     {
         public async Task SendMessage(Message message)
         {
-            await Clients.All.SendAsync("RecieveMessages", message);
+            await Clients.All.SendAsync("receiveMessage", message);
         }
     }
 }
