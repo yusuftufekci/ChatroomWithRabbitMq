@@ -9,7 +9,7 @@ namespace ChatroomWithRabbitMq.Models
         public string UserName { get; set; }
         [Required]
         public string Text { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime CreateDate { get; set; } = DateTime.Now;
 
         public string UserId { get; set; }
         public virtual ChatUser SenderUser { get; set; }
