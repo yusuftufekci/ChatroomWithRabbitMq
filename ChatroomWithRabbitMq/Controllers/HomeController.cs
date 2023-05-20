@@ -1,5 +1,6 @@
 ﻿using ChatroomWithRabbitMq.Data;
 using ChatroomWithRabbitMq.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,24 +25,22 @@ namespace ChatroomWithRabbitMq.Controllers
         
             return View();
         }
-
+        [Authorize]
+        [HttpGet]
         public async Task<IActionResult> Chatroom()
         {
+            
+            var currentUser = await _userManager.GetUserAsync(User);
             if (User.Identity.IsAuthenticated)
             {
-                var currentUser = await _userManager.GetUserAsync(User);
-                if (User.Identity.IsAuthenticated)
-                {
-                    ViewBag.CurrentUserName = currentUser.UserName;
+                ViewBag.CurrentUserName = currentUser.UserName;
 
-                }
-                var messages = await _context.Messages.OrderByDescending(p=>p.Id).Take(50).ToListAsync();
-                return View(messages);
             }
-            return Redirect("Index");
-            
+            var messages = await _context.Messages.OrderByDescending(p=>p.Id).Take(50).ToListAsync();
+            return View(messages);            
         }
-
+        [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(Message message)
         {
            
