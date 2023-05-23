@@ -1,6 +1,8 @@
 using ChatroomWithRabbitMq.Core.Hubs;
+using ChatroomWithRabbitMq.Core.Service;
 using ChatroomWithRabbitMq.Data;
 using ChatroomWithRabbitMq.Models;
+using ChatroomWithRabbitMq.Service.Chatroom;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +19,7 @@ builder.Services.AddDefaultIdentity<ChatUser>(options => options.SignIn.RequireC
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
 builder.Services.AddSignalRCore();
+builder.Services.AddScoped<IChatroomService, ChatroomService>();
 
 var app = builder.Build();
 
