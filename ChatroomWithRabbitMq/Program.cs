@@ -1,8 +1,12 @@
+using ChatroomWithRabbitMq.Controllers;
 using ChatroomWithRabbitMq.Core.Hubs;
-using ChatroomWithRabbitMq.Core.Service;
+using ChatroomWithRabbitMq.Core.Service.ChatRoom;
+using ChatroomWithRabbitMq.Core.StockBot;
 using ChatroomWithRabbitMq.Data;
 using ChatroomWithRabbitMq.Models;
 using ChatroomWithRabbitMq.Service.Chatroom;
+using ChatroomWithRabbitMq.Service.RabbitMq;
+using ChatroomWithRabbitMq.Service.StockBot;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +24,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
 builder.Services.AddSignalRCore();
 builder.Services.AddScoped<IChatroomService, ChatroomService>();
+builder.Services.AddScoped<IStockBotService, StockBotService>();
+
+
+
+//builder.Services.AddScoped<Consumer>();
 
 var app = builder.Build();
 
