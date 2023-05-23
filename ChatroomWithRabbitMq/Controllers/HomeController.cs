@@ -1,54 +1,34 @@
-﻿using ChatroomWithRabbitMq.Data;
+﻿using ChatroomWithRabbitMq.Core.Service;
 using ChatroomWithRabbitMq.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace ChatroomWithRabbitMq.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        public readonly UserManager<ChatUser> _userManager;
-        public readonly ApplicationDbContext _context;
-        public HomeController(ILogger<HomeController> logger, UserManager<ChatUser> userManager, ApplicationDbContext applicationDbContext)
+        private readonly IChatroomService _chatroomService;
+        public HomeController(IChatroomService chatroomService)
         {
-            _logger = logger;
-            _userManager = userManager;
-            _context = applicationDbContext;
+            _chatroomService = chatroomService;
         }
 
         public IActionResult Index()
         {
-        
             return View();
         }
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> Chatroom()
-        {
-            
-            var currentUser = await _userManager.GetUserAsync(User);
-            if (User.Identity.IsAuthenticated)
-            {
-                ViewBag.CurrentUserName = currentUser.UserName;
-
-            }
-            var messages = await _context.Messages.OrderByDescending(p=>p.Id).Take(50).ToListAsync();
-            return View(messages);            
+        {          
+            return View(await _chatroomService.GetMessages());            
         }
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Create(Message message)
         {
-           
-            message.UserName = User.Identity.Name;
-            var sender = await _userManager.GetUserAsync(User);
-            message.UserId= sender.Id;
-            await _context.Messages.AddAsync(message);
-            await _context.SaveChangesAsync();
+            await _chatroomService.CreateMessages(User, message);
             return Ok();
         }
 
