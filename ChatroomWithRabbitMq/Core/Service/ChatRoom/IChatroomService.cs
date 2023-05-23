@@ -1,7 +1,7 @@
 ﻿using ChatroomWithRabbitMq.Models;
 using System.Security.Claims;
 
-namespace ChatroomWithRabbitMq.Core.Service
+namespace ChatroomWithRabbitMq.Core.Service.ChatRoom
 {
     public interface IChatroomService
     {

@@ -1,9 +1,14 @@
-﻿using ChatroomWithRabbitMq.Core.Service;
+﻿using ChatroomWithRabbitMq.Core.Service.ChatRoom;
 using ChatroomWithRabbitMq.Data;
 using ChatroomWithRabbitMq.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
+using System;
 using System.Security.Claims;
+using System.Formats.Asn1;
+using CsvHelper;
+using System.Globalization;
 
 namespace ChatroomWithRabbitMq.Service.Chatroom
 {
@@ -22,7 +27,7 @@ namespace ChatroomWithRabbitMq.Service.Chatroom
         {
             try
             {
-                if(message.Text!= null)
+                if(message.Text!= null && !message.Text.Contains("/stock="))
                 {
                     message.UserName = User.Identity.Name;
                     var sender = await _userManager.GetUserAsync(User);
@@ -52,5 +57,6 @@ namespace ChatroomWithRabbitMq.Service.Chatroom
                 throw new InvalidOperationException("Something is wrong", ex);
             }
         }
+        
     }
 }
