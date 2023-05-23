@@ -21,6 +21,8 @@ messages. Done
 
 Need to install rabbitmq,mssql.
 
+See the que in rabbitmq u can use your local.
+
 More than 2 person can register and join the system. After that they can join the chatroom and talk with each other. If they want to use StockBot they need to write
 /stock=stock_code. Stock bot call the api and get the information. But unfortunately they cant see the message in the chatroom. All the message waiting in the que to someone
 get them :)
