@@ -1,4 +1,4 @@
-﻿using ChatroomWithRabbitMq.Core.Service;
+﻿using ChatroomWithRabbitMq.Core.Service.ChatRoom;
 using ChatroomWithRabbitMq.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +8,9 @@ namespace ChatroomWithRabbitMq.Controllers
 {
     public class HomeController : Controller
     {
+
         private readonly IChatroomService _chatroomService;
+
         public HomeController(IChatroomService chatroomService)
         {
             _chatroomService = chatroomService;
