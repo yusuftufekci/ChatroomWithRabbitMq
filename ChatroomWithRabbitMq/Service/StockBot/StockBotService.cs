@@ -36,12 +36,12 @@ namespace ChatroomWithRabbitMq.Service.StockBot
                     var factory = new ConnectionFactory() { HostName = "localhost" };
                     using var connection = factory.CreateConnection();
                     using var channel = connection.CreateModel();
-                    channel.QueueDeclare(queue: "Message2", durable: false, exclusive: false, autoDelete: false,
+                    channel.QueueDeclare(queue: "Message", durable: false, exclusive: false, autoDelete: false,
                         arguments: null);
 
                     var body = Encoding.UTF8.GetBytes("“" + stock.Symbol + " quote is "+ stock.Close+ " per share”");
 
-                    channel.BasicPublish(exchange: "", routingKey: "Message2", basicProperties: null, body: body);
+                    channel.BasicPublish(exchange: "", routingKey: "Message", basicProperties: null, body: body);
                     return true;
                 }
                 return false;

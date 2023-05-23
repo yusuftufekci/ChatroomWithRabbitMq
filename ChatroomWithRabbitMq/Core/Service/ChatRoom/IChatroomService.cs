@@ -7,7 +7,5 @@ namespace ChatroomWithRabbitMq.Core.Service.ChatRoom
     {
         Task<List<Message>> GetMessages();
         Task CreateMessages(ClaimsPrincipal User, Message message);
-
-
     }
 }

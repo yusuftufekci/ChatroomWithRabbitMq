@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Connections;
-using RabbitMQ.Client;
+﻿using RabbitMQ.Client;
 
 namespace ChatroomWithRabbitMq.Service.RabbitMq
 {

@@ -1,5 +1,4 @@
-﻿using ChatroomWithRabbitMq.Core.Hubs;
-using ChatroomWithRabbitMq.Core.StockBot;
+﻿using ChatroomWithRabbitMq.Core.StockBot;
 using Microsoft.AspNetCore.SignalR;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -10,7 +9,6 @@ namespace ChatroomWithRabbitMq.Service.RabbitMq
     public class Consumer : Hub
     {
         private readonly RabbitMqService _rabbitMqService;
-        private readonly IStockBotService _stockBotService;
 
 
         public Consumer(string queueName)
@@ -23,7 +21,7 @@ namespace ChatroomWithRabbitMq.Service.RabbitMq
                 using (var channel = connection.CreateModel())
                 {
                     var consumer = new EventingBasicConsumer(channel);
-                    // Received event'i sürekli listen modunda olacaktır.
+                    // Received event listen all the time
                     consumer.Received += (model, ea) =>
                     {
                         var body = ea.Body.ToArray();

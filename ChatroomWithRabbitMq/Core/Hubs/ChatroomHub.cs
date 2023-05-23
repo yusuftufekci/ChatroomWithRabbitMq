@@ -30,10 +30,7 @@ namespace ChatroomWithRabbitMq.Core.Hubs
         }
         public async Task SendStockMessage(string message)
         {
-            
-
-                await Clients.All.SendAsync("receiveMessage", message);
-            
+            await Clients.All.SendAsync("receiveMessage", message);
         }
     }
 }
